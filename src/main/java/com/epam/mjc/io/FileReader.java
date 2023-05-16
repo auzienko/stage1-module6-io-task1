@@ -22,8 +22,7 @@ public class FileReader {
                     Long.parseLong(keyValue.get("Phone")));
 
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
-        return new Profile();
     }
 }
