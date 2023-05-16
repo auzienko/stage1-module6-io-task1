@@ -22,7 +22,7 @@ public class FileReader {
                     Long.parseLong(keyValue.get("Phone")));
 
         } catch (IOException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new MyOwnException(e.getMessage());
         }
     }
 }
