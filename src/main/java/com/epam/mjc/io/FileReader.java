@@ -8,15 +8,12 @@ import java.util.Map;
 public class FileReader {
 
     public Profile getDataFromFile(File file) {
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)))) {
             Map<String, String> keyValue = new HashMap<>();
             while (br.ready()) {
                 String[] split = br.readLine().split(":");
                 keyValue.put(split[0], split[1].strip());
             }
-
-            br.close();
 
             return new Profile(
                     keyValue.get("Name"),
@@ -24,7 +21,8 @@ public class FileReader {
                     keyValue.get("Email"),
                     Long.parseLong(keyValue.get("Phone")));
 
-        } catch (IOException ignore) {
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
         return new Profile();
     }
